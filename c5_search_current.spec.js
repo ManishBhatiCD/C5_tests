@@ -120,25 +120,3 @@ describe('Test suit 1: Search focused view - General functionality check, map ce
                 cy.get('.leaflet-container').scrollIntoView();
             })
         })
-
-        describe('Legacy form submission and Connect to C5', function(){
-            before(function () {
-                cy.clearCookie('PHPSESSID');
-                cy.clearCookie('identity');
-                //cy.login();
-                cy.maintain_login();
-                const clear = Cypress.LocalStorage.clear;
-                Cypress.LocalStorage.clear = function (keys, ls, rs) {
-                    if (keys) {
-                        return clear.apply(this, arguments)
-                    }        
-                }
-                cy.wait(4000);
-                cy.viewport(1440, 900);
-                })
-        
-                beforeEach(() => {
-                    Cypress.Cookies.preserveOnce('PHPSESSID');
-                    Cypress.Cookies.preserveOnce('identity');
-                    })
-                })
