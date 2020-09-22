@@ -1,14 +1,37 @@
-name: Chrome headless
+name: example-recording
 on: [push]
 jobs:
-  cypress-run:
-    runs-on: ubuntu-16.04
+  basic:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: cypress-io/github-action@v2
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Cypress tests
+        # normally you would write
+        # uses: cypress-io/github-action@v2
+        uses: ./
+        # let's give this action an ID so we can refer
+        # to its output values later
+        id: cypress
+        # Continue the build in case of an error, as we need to set the
+        # commit status in the next step, both in case of success and failure
+        continue-on-error: true
         with:
-          browser: chrome
-          headless: true
+          working-directory: examples/recording
+          record: true
+          parallel: true
+          group: Recording example
+          tag: action
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.e9fa0fff-f3b2-4974-91be-9d211624ad65 }}
+          GITHUB_TOKEN: ${{ secrets.c51712a0b1b6c076b289f286aa7367dd18814afe }}
+
+      - name: Print Dashboard URL
+        run: |
+          echo Cypress finished with: ${{ steps.cypress.outcome }}
+          echo See results at ${{ steps.cypress.outputs.https://dashboard.cypress.io/organizations/6b959e3c-2a43-4bd3-8746-44157012e93e/projects }}
 # name: Cypress tests
 # on: [push]
 # jobs:
