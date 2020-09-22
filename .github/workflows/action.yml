@@ -18,7 +18,7 @@ jobs:
         # commit status in the next step, both in case of success and failure
         continue-on-error: true
         with:
-          working-directory: examples/recording
+          working-directory: /action.yml
           record: true
           parallel: true
           group: Recording example
