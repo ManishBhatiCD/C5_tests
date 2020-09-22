@@ -31,7 +31,7 @@ jobs:
       - name: Print Dashboard URL
         run: |
           echo Cypress finished with: ${{ steps.cypress.outcome }}
-          echo See results at ${{ steps.cypress.outputs.dashboard.cypress.io/organizations/6b959e3c-2a43-4bd3-8746-44157012e93e/projects }}
+          echo See results at ${{ steps.cypress.outputs.dashboardUrl }}
 # name: Cypress tests
 # on: [push]
 # jobs:
